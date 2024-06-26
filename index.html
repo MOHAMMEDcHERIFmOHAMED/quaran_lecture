@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <style>
+        body{
+            display:flex ;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: 'popins' , sans-serif;
+
+        }
+
+        .main{
+            display:flex ;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            box-shadow: 0 4px 15px 10px rgb(141, 141, 141);            
+            gap: 35px;
+            height: 70%;
+            width: 370px;
+            border-radius: 20px;
+            background-color:#faebd7;
+        }
+        .main img{
+            background: url(imgs/saud_shuraim.jpg);
+            background-position: center;
+            background-size: cover;
+            border: solid 8px ;    
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+        }
+        .controls{
+            gap: 25px;
+            display:flex ;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }        
+        .controls i {
+            font-size: 40px;
+        }
+       
+        .controls button{
+            padding: 10px;
+            border-radius: 50%;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+        .play_btn i{
+            padding: 25px;
+            font-size: 50px;
+            border-radius: 60%;
+            background-color: #ffcf91;
+        }
+        #progress{
+             width: 70%;
+        }
+        h1{
+            font-weight: 900;
+        }
+        /* Styling the range input (progress bar) */
+#progress {
+    -webkit-appearance: none;
+    width: 70%;
+    height: 10px;
+    background: #ddd;
+    border-radius: 5px;
+    outline: none;
+    margin: 0;
+}
+
+/* WebKit browsers */
+#progress::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 10px;
+    background: #ccc;
+    border-radius: 5px;
+    border: none;
+}
+
+#progress::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #ff0000;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: -5px; /* Center the thumb */
+}
+
+    </style>
+</head>
+<body>
+    
+<div class="main">
+    <img src="" alt="" >
+    <h1> SAUD-ALSHURAIM</h1>
+    <audio class="song" ><source  src="videoplayback (4).m4a" type="audio/mpeg" ></audio>
+    <input type="range" value="0"  id="progress">
+    <div class="controls">
+       <button><i class='bx bx-skip-previous-circle' ></i></button> 
+       <button class="play_btn" onclick="playStop()" ><i class='bx bx-play-circle'></i></button> 
+       <button><i class='bx bx-skip-next-circle' ></i></button> 
+    </div>
+</div>
+
+<script>
+    let play_btn = document.querySelector(".play_btn i");
+    let play_btn2 = document.querySelector(".play_btn");
+    let bar = document.querySelector(" #progress");
+    let song = document.querySelector(" .song");
+    let progress = 0 ; 
+
+function playStop() {
+    if (play_btn.classList.contains('bx-play-circle')) {
+        play_btn.classList.remove('bx-play-circle');
+        play_btn.classList.add('bx-stop-circle');
+        song.play();
+    } else {
+        play_btn.classList.remove('bx-stop-circle');
+        play_btn.classList.add('bx-play-circle');
+        song.pause();
+    }
+}
+
+song.onloadedmetadata = function(){
+    bar.max = song.duration ;
+bar.value = song.currentTime ;
+}
+bar.onchange = function playing(){
+    song.value = bar.currentTime ;
+    play_btn.classList.add('bx-stop-circle');
+    song.play();
+    song.currentTime = bar.value ;
+}
+
+let interval = setInterval(function progressBar(){
+        bar.value = song.currentTime ;
+        if(song.currentTime   === song.duration){
+             clearInterval(interval);
+         }
+    },500);
+
+    song.onended = function() {
+    play_btn.classList.remove('bx-stop-circle');
+    play_btn.classList.add('bx-play-circle');
+    bar.value = 0;
+};
+
+</script>
+</body>
+</html>
