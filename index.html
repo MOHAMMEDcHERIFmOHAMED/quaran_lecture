@@ -29,7 +29,6 @@
             background-color:#faebd7;
         }
         .main img{
-            background: url(imgs/saud_shuraim.jpg);
             background-position: center;
             background-size: cover;
             border: solid 8px ;    
@@ -96,66 +95,29 @@
     cursor: pointer;
     margin-top: -5px; /* Center the thumb */
 }
-
+.info{
+    text-align: center;
+}
     </style>
 </head>
 <body>
     
 <div class="main">
-    <img src="" alt="" >
-    <h1> SAUD-ALSHURAIM</h1>
-    <audio class="song" ><source  src="imgs/videoplayback (4).m4a" type="audio/mpeg" ></audio>
+    <img id="img" src="" alt="" >
+    <div class="info">
+        <h1 id="name" > </h1>
+        <h2 id="title" > </h2>
+    </div>
+   
+    <audio class="song" ><source id="sound" type="audio/mpeg" ></audio>
     <input type="range" value="0"  id="progress">
     <div class="controls">
-       <button><i class='bx bx-skip-previous-circle' ></i></button> 
+       <button onclick="prvcSurah()" ><i class='bx bx-skip-previous-circle' ></i></button> 
        <button class="play_btn" onclick="playStop()" ><i class='bx bx-play-circle'></i></button> 
-       <button><i class='bx bx-skip-next-circle' ></i></button> 
+       <button onclick="nextSurah()" ><i class='bx bx-skip-next-circle' ></i></button> 
     </div>
 </div>
 
-<script>
-    let play_btn = document.querySelector(".play_btn i");
-    let play_btn2 = document.querySelector(".play_btn");
-    let bar = document.querySelector(" #progress");
-    let song = document.querySelector(" .song");
-    let progress = 0 ; 
-
-function playStop() {
-    if (play_btn.classList.contains('bx-play-circle')) {
-        play_btn.classList.remove('bx-play-circle');
-        play_btn.classList.add('bx-stop-circle');
-        song.play();
-    } else {
-        play_btn.classList.remove('bx-stop-circle');
-        play_btn.classList.add('bx-play-circle');
-        song.pause();
-    }
-}
-
-song.onloadedmetadata = function(){
-    bar.max = song.duration ;
-bar.value = song.currentTime ;
-}
-bar.onchange = function playing(){
-    song.value = bar.currentTime ;
-    play_btn.classList.add('bx-stop-circle');
-    song.play();
-    song.currentTime = bar.value ;
-}
-
-let interval = setInterval(function progressBar(){
-        bar.value = song.currentTime ;
-        if(song.currentTime   === song.duration){
-             clearInterval(interval);
-         }
-    },500);
-
-    song.onended = function() {
-    play_btn.classList.remove('bx-stop-circle');
-    play_btn.classList.add('bx-play-circle');
-    bar.value = 0;
-};
-
-</script>
+<script src="quaran_lecture.js"></script>
 </body>
 </html>
