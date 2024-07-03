@@ -1,0 +1,26 @@
+[ 
+{
+    "suraht" : "nooh" ,
+    "the_lecture" : "al Mishary" ,
+    "img" : "imgs/Mishary.png" ,
+    "audio" :"imgs/nooh.m4a" 
+},
+{
+    "suraht" : "al_mulk" ,
+    "the_lecture" : "islam sobhi" ,
+    "img" : "imgs/islam_sobhi.jpg" ,
+    "audio" :"imgs/al_mulk.m4a" 
+},
+{
+    "suraht" : "al_inssan" ,
+    "the_lecture" : "saud shuraim" ,
+    "img" : "imgs/saud_shuraim.jpg",
+    "audio" :"imgs/insan.m4a" 
+},
+{
+      "suraht" : "altaghaboun" ,
+    "the_lecture" : "islam sobhi" ,
+    "img" : "imgs/islam_sobhi.jpg", 
+    "audio" :"imgs/taghabon.m4a" 
+}
+]
